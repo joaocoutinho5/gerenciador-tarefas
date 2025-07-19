@@ -9,9 +9,32 @@ function ToDoList() {
   );
   const [novoItem, setNovoItem] = useState("");
 
+  const [quantidadeConcluidas, setQuantidadeConcluidas] = useState(0);
+
+  const [quantidadePendentes, setQuantidadePendentes] = useState(0);
+
   useEffect(() => {
     localStorage.setItem("Lista", JSON.stringify(lista));
   }, [lista]);
+
+  useEffect(() => {
+    contarTarefas();
+  }, [lista]);
+
+  function contarTarefas() {
+    let concluidas = 0;
+    let pendentes = 0;
+
+    lista.forEach((item) => {
+      if (item.isCompleted) {
+        concluidas++;
+      } else {
+        pendentes++;
+      }
+    });
+    setQuantidadeConcluidas(concluidas);
+    setQuantidadePendentes(pendentes);
+  }
 
   function adicionaItem(form) {
     form.preventDefault();
@@ -53,6 +76,7 @@ function ToDoList() {
           className="flex w-full h-[60px] bg-[#2d3046] border-none pl-[30px] text-[16px] rounded-[16px] text-white "
           type="text"
           value={novoItem}
+          autoComplete="off"
           onChange={(e) => {
             setNovoItem(e.target.value);
           }}
@@ -111,6 +135,20 @@ function ToDoList() {
             >
               Deletar todas
             </button>
+          )}
+          {lista.length > 0 && (
+            <div className="text-white flex flex-col h-[100px] justify-center text-center gap-[10px] mt-[30px] border-[2px] border-dashed border-[#363b65] rounded-[5px]">
+              <p>
+                <strong>
+                  Você tem {quantidadeConcluidas} tarefas concluídas! ✔
+                </strong>
+              </p>
+              <p className="">
+                <strong>
+                  Você tem {quantidadePendentes} tarefas pendentes! ✖
+                </strong>
+              </p>
+            </div>
           )}
         </div>
       </div>
