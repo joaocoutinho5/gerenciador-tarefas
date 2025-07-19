@@ -26,6 +26,10 @@ As tarefas são **armazenadas localmente no navegador**, utilizando o **Local St
 - **Marcar tarefas como concluídas**
 
   - Estilização com `line-through` para indicar conclusão
+ 
+- **Contador de tarefas**
+  
+  - Mostra quantas tarefas estão ativas e quantas já foram concluídas
 
 - **Exclusão de tarefas**
 
