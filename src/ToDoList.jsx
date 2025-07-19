@@ -140,7 +140,7 @@ function ToDoList() {
             <div className="text-white flex flex-col h-[100px] justify-center text-center gap-[10px] mt-[30px] border-[2px] border-dashed border-[#363b65] rounded-[5px]">
               <p>
                 <strong>
-                  Você tem {quantidadeConcluidas} tarefas concluidas! ✔
+                  Você tem {quantidadeConcluidas} tarefas concluídas! ✔
                 </strong>
               </p>
               <p className="">
