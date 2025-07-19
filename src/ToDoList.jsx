@@ -137,16 +137,12 @@ function ToDoList() {
             </button>
           )}
           {lista.length > 0 && (
-            <div className="text-white flex flex-col h-[100px] justify-center text-center gap-[10px] mt-[30px] border-[2px] border-dashed border-[#363b65] rounded-[5px]">
+            <div className="text-white flex flex-col h-[100px] justify-center text-center gap-[10px] mt-[30px] mb-[30px] border-[2px] border-dashed border-[#363b65] rounded-[5px]">
               <p>
-                <strong>
-                  Você tem {quantidadeConcluidas} tarefas concluídas! ✔
-                </strong>
+                <strong>✖ Tarefas pendentes: {quantidadePendentes}</strong>
               </p>
-              <p className="">
-                <strong>
-                  Você tem {quantidadePendentes} tarefas pendentes! ✖
-                </strong>
+              <p>
+                <strong>✔ Tarefas concluídas: {quantidadeConcluidas}</strong>
               </p>
             </div>
           )}
