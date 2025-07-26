@@ -111,7 +111,7 @@ function ToDoList() {
 
   return (
     <div className="pl-[10px] pr-[10px] md:pl-[0.1px] md:pr-[0.1px]">
-      <h1 className="text-[25px] font-[900] text-[#7d83b9] text-center pt-[30px]">
+      <h1 className="text-[28px] font-[900] text-[#7d83b9] text-center pt-[30px]">
         To-Do-List
       </h1>
       <form
@@ -120,29 +120,30 @@ function ToDoList() {
       >
         <input
           id="input-entrada"
-          className="flex w-full h-[60px] bg-[#2d3046] border-none pl-[30px] text-[16px] rounded-[16px] text-white "
+          className="flex w-full h-[60px] bg-[#2d3046] border-none pl-[30px] text-[18px] rounded-[16px] text-white "
           type="text"
           value={novoItem}
           autoComplete="off"
+          maxLength={120}
           onChange={(e) => {
             setNovoItem(e.target.value);
           }}
           placeholder="Adicione uma Tarefa"
         />
         <button
-          className="absolute top-0 right-0 bg-[#363b65] hover:bg-[#363f88] border-none text-white cursor-pointer pt-[10px] pb-[10px] pl-[25px] pr-[25px] h-[60px] rounded-r-[10px]"
+          className="absolute top-0 right-0 bg-[#363b65] hover:bg-[#363f88] border-none text-[20px] text-white cursor-pointer pt-[10px] pb-[10px] pl-[25px] pr-[25px] h-[60px] rounded-r-[10px]"
           type="submit"
         >
-          Add
+          +
         </button>
       </form>
       <div
         id="listaTarefas"
         className="flex justify-center flex-col w-full md:w-[600px] m-auto"
       >
-        <div>
+        <div className="">
           {lista.length < 1 ? (
-            <div className="flex flex-col items-center gap-[20px] animate-fade">
+            <div className="flex flex-col items-center mt-10 animate-fade">
               <p className="text-white text-[30px] h-[24px] min-h-[24px]">
                 {mensagem}
                 <span className="animate-pulse">|</span>
@@ -155,14 +156,14 @@ function ToDoList() {
                 <div
                   key={item.id}
                   id="item"
-                  className={`flex justify-between mb-[10px] cursor-pointer hover:bg-[#151627] ${
+                  className={`flex justify-between mb-[10px] border border-[#363b65] hover:bg-[#151627] cursor-pointer ${
                     item.isCompleted
                       ? "bg-[#1e1f2e] opacity-60 border-none"
                       : ""
                   }`}
                 >
                   <span
-                    className={`w-full text-white mr-[10px] pt-[10px] pb-[10px] pl-[15px] pr-[15px] ${
+                    className={`w-full text-[18px] text-white mr-[10px] pt-[10px] pb-[10px] pl-[15px] pr-[15px] ${
                       item.isCompleted ? "line-through text-[#4d506e]" : ""
                     }`}
                     onClick={() => {
@@ -172,7 +173,7 @@ function ToDoList() {
                     {item.text}
                   </span>
                   <button
-                    className="text-[#4d506e] hover:text-white border-b border-[#363b65] bg-none hover:bg-[#ff004c] p-[15px] cursor-pointer"
+                    className="text-[18px] text-[#4d506e] hover:text-white bg-none hover:bg-[#ff004c] p-[15px] cursor-pointer"
                     onClick={() => {
                       deleta(item.id);
                     }}
@@ -187,18 +188,15 @@ function ToDoList() {
               onClick={() => {
                 deletaTudo();
               }}
-              className="mt-[30px] w-full text-[#ff004c] hover:text-white font-bold border border-[#ff004c] bg-none hover:bg-[#ff004c] p-[15px] rounded-[5px] cursor-pointer"
+              className="mt-[30px] w-full text-[18px] text-[#ff004c] hover:text-white font-bold border border-[#ff004c] bg-none hover:bg-[#ff004c] p-[15px] rounded-[5px] cursor-pointer"
             >
               Deletar todas
             </button>
           )}
           {lista.length > 0 && (
-            <div className="text-white flex flex-col h-[100px] justify-center text-center gap-[10px] mt-[30px] mb-[30px] border-[2px] border-dashed border-[#363b65] rounded-[5px]">
+            <div className="text-[18px] text-white flex flex-col h-[100px] justify-center text-center gap-[10px] mt-[30px] mb-[30px] border-[2px] border-dashed border-[#363b65] rounded-[5px]">
               <p>
                 <strong>✖ Tarefas pendentes: {quantidadePendentes}</strong>
-              </p>
-              <p>
-                <strong>✔ Tarefas concluídas: {quantidadeConcluidas}</strong>
               </p>
             </div>
           )}
