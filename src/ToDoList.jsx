@@ -13,6 +13,20 @@ function ToDoList() {
 
   const [quantidadePendentes, setQuantidadePendentes] = useState(0);
 
+  const frases = [
+    "Sua lista esta vazia.",
+    "Adicione sua primeira tarefa!",
+    "Vamos organizar seu dia!",
+  ];
+
+  const [mensagem, setMensagem] = useState("");
+
+  const [fraseIndex, setFraseIndex] = useState(0);
+
+  const [letraIndex, setLetraIndex] = useState(0);
+
+  const [apagando, setApagando] = useState(false);
+
   useEffect(() => {
     localStorage.setItem("Lista", JSON.stringify(lista));
   }, [lista]);
@@ -20,6 +34,34 @@ function ToDoList() {
   useEffect(() => {
     contarTarefas();
   }, [lista]);
+
+  useEffect(() => {
+    const atual = frases[fraseIndex];
+    let timeout;
+
+    if (!apagando && letraIndex <= atual.length) {
+      timeout = setTimeout(() => {
+        setMensagem(atual.substring(0, letraIndex));
+        setLetraIndex(letraIndex + 1);
+      }, 100);
+    } else if (apagando && letraIndex >= 0) {
+      timeout = setTimeout(() => {
+        setMensagem(atual.substring(0, letraIndex));
+        setLetraIndex(letraIndex - 1);
+      }, 50);
+    } else {
+      timeout = setTimeout(() => {
+        if (apagando) {
+          setApagando(false);
+          setFraseIndex((fraseIndex + 1) % frases.length);
+        } else {
+          setApagando(true);
+        }
+      }, 1000);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [letraIndex, apagando]);
 
   function contarTarefas() {
     let concluidas = 0;
@@ -38,24 +80,29 @@ function ToDoList() {
 
   function adicionaItem(form) {
     form.preventDefault();
-    if (!novoItem) {
-      return;
-    }
-    setLista([...lista, { text: novoItem, isCompleted: false }]);
+    if (!novoItem) return;
+
+    const novo = {
+      id: Date.now(),
+      text: novoItem,
+      isCompleted: false,
+    };
+
+    setLista([...lista, novo]);
     setNovoItem("");
     document.getElementById("input-entrada").focus();
   }
 
-  function clicou(index) {
-    const listaAux = [...lista];
-    listaAux[index].isCompleted = !listaAux[index].isCompleted;
-    setLista(listaAux);
+  function clicou(id) {
+    const novaLista = lista.map((item) =>
+      item.id === id ? { ...item, isCompleted: !item.isCompleted } : item
+    );
+    setLista(novaLista);
   }
 
-  function deleta(index) {
-    const listaAux = [...lista];
-    listaAux.splice(index, 1);
-    setLista(listaAux);
+  function deleta(id) {
+    const novaLista = lista.filter((item) => item.id !== id);
+    setLista(novaLista);
   }
 
   function deletaTudo() {
@@ -65,7 +112,7 @@ function ToDoList() {
   return (
     <div className="pl-[10px] pr-[10px] md:pl-[0.1px] md:pr-[0.1px]">
       <h1 className="text-[25px] font-[900] text-[#7d83b9] text-center pt-[30px]">
-        Lista de Tarefas
+        To-Do-List
       </h1>
       <form
         onSubmit={adicionaItem}
@@ -95,36 +142,45 @@ function ToDoList() {
       >
         <div>
           {lista.length < 1 ? (
-            <img className="max-w-full" src={Icone} />
+            <div className="flex flex-col items-center gap-[20px] animate-fade">
+              <p className="text-white text-[30px] h-[24px] min-h-[24px]">
+                {mensagem}
+                <span className="animate-pulse">|</span>
+              </p>
+            </div>
           ) : (
-            lista.map((item, index) => (
-              <div
-                key={index}
-                id="item"
-                className={`flex justify-between border border-[#363b65] mb-[10px] cursor-pointer hover:bg-[#151627] ${
-                  item.isCompleted ? "bg-[#1e1f2e] opacity-60 border-none" : ""
-                }`}
-              >
-                <span
-                  className={`w-full text-white mr-[10px] pt-[10px] pb-[10px] pl-[15px] pr-[15px] ${
-                    item.isCompleted ? "line-through text-[#4d506e]" : ""
+            [...lista]
+              .sort((a, b) => a.isCompleted - b.isCompleted)
+              .map((item) => (
+                <div
+                  key={item.id}
+                  id="item"
+                  className={`flex justify-between mb-[10px] cursor-pointer hover:bg-[#151627] ${
+                    item.isCompleted
+                      ? "bg-[#1e1f2e] opacity-60 border-none"
+                      : ""
                   }`}
-                  onClick={() => {
-                    clicou(index);
-                  }}
                 >
-                  {item.text}
-                </span>
-                <button
-                  className="text-[#4d506e] hover:text-white bg-none hover:bg-[#ff004c] border-none p-[15px] cursor-pointer"
-                  onClick={() => {
-                    deleta(index);
-                  }}
-                >
-                  Deletar
-                </button>
-              </div>
-            ))
+                  <span
+                    className={`w-full text-white mr-[10px] pt-[10px] pb-[10px] pl-[15px] pr-[15px] ${
+                      item.isCompleted ? "line-through text-[#4d506e]" : ""
+                    }`}
+                    onClick={() => {
+                      clicou(item.id);
+                    }}
+                  >
+                    {item.text}
+                  </span>
+                  <button
+                    className="text-[#4d506e] hover:text-white border-b border-[#363b65] bg-none hover:bg-[#ff004c] p-[15px] cursor-pointer"
+                    onClick={() => {
+                      deleta(item.id);
+                    }}
+                  >
+                    Deletar
+                  </button>
+                </div>
+              ))
           )}
           {lista.length > 0 && (
             <button
