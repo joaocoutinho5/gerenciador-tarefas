@@ -2,6 +2,10 @@
 
 Este repositório foi criado com o objetivo de **estudo e prática** no desenvolvimento de aplicações web utilizando **React** e **Tailwind CSS**.
 
+## Acesse o site do projeto
+
+[Clique aqui](https://gerenciador-tarefas-ruddy.vercel.app)
+
 ## Tecnologias Utilizadas
 
 - **React**
