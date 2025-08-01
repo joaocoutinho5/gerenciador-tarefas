@@ -1,10 +1,8 @@
+## [Acesse o site do projeto](https://gerenciador-tarefas-ruddy.vercel.app)
+
 # Projeto de Estudo – Gerenciador de Tarefas
 
 Este repositório foi criado com o objetivo de **estudo e prática** no desenvolvimento de aplicações web utilizando **React** e **Tailwind CSS**.
-
-## Acesse o site do projeto
-
-[Clique aqui](https://gerenciador-tarefas-ruddy.vercel.app)
 
 ## Tecnologias Utilizadas
 
@@ -33,7 +31,7 @@ As tarefas são **armazenadas localmente no navegador**, utilizando o **Local St
  
 - **Contador de tarefas**
   
-  - Mostra quantas tarefas estão ativas e quantas já foram concluídas
+  - Mostra quantas tarefas estão pendentes
 
 - **Exclusão de tarefas**
 
