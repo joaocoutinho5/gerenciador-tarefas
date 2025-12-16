@@ -88,7 +88,7 @@ function ToDoList() {
   const quantidadeConcluidas = lista.filter((item) => item.isCompleted).length;
 
   return (
-    <div className="pl-[10px] pr-[10px] md:pl-[0.1px] md:pr-[0.1px]">
+    <main className="w-full h-screen px-8 md:px-[0.1px]">
       <h1 className="text-[28px] font-[900] text-[#7d83b9] text-center pt-[30px]">
         To-Do-List
       </h1>
@@ -108,7 +108,7 @@ function ToDoList() {
             <ListaTarefas lista={lista} clicou={clicou} deleta={deleta} />
             <button
               onClick={deletaTudo}
-              className="mt-[30px] w-full text-[18px] text-[#ff004c] hover:text-white font-bold border border-[#ff004c] bg-none hover:bg-[#ff004c] p-[15px] rounded-[5px] cursor-pointer"
+              className="mt-[30px] w-full text-[18px] text-[#ff004c] hover:text-white font-bold border border-[#ff004c] bg-none hover:bg-[#ff004c] p-[15px] rounded-[5px] cursor-pointer transition"
             >
               Deletar todas
             </button>
@@ -119,7 +119,7 @@ function ToDoList() {
           </>
         )}
       </div>
-    </div>
+    </main>
   );
 }
 
