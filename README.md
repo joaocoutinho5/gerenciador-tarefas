@@ -1,6 +1,6 @@
-## [Acesse o site do projeto](https://gerenciador-tarefas-ruddy.vercel.app)
-
 # Projeto de Estudo – Gerenciador de Tarefas
+
+[![Acessar Projeto](https://img.shields.io/badge/Acessar%20Projeto-Online-success)](https://gerenciador-tarefas-ruddy.vercel.app)
 
 Este repositório foi criado com o objetivo de **estudo e prática** no desenvolvimento de aplicações web utilizando **React** e **Tailwind CSS**.
 
