@@ -17,7 +17,7 @@ export default function Formulario({ novoItem, setNovoItem, adicionaItem }) {
         placeholder="Adicione uma Tarefa"
       />
       <button
-        className="absolute top-0 right-0 bg-[#363b65] hover:bg-[#363f88] border-none text-[20px] text-white cursor-pointer pt-[10px] pb-[10px] pl-[25px] pr-[25px] h-[60px] rounded-r-[10px]"
+        className="absolute top-0 right-0 bg-[#363b65] hover:bg-[#363f88] border-none text-[20px] text-white cursor-pointer py-[10px] px-[25px] h-[60px] rounded-r-[10px] transition"
         type="submit"
       >
         +

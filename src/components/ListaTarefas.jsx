@@ -12,7 +12,7 @@ export default function ListaTarefas({ lista, clicou, deleta }) {
         <div
           key={item.id}
           id="item"
-          className={`flex justify-between mb-[10px] border border-[#363b65] hover:bg-[#151627] cursor-pointer ${
+          className={`flex justify-between mb-[10px] border border-[#363b65] hover:bg-[#151627] cursor-pointer transition ${
             item.isCompleted ? "bg-[#1e1f2e] opacity-60 border-none" : ""
           }`}
         >
@@ -25,7 +25,7 @@ export default function ListaTarefas({ lista, clicou, deleta }) {
             {item.text}
           </span>
           <button
-            className="text-[18px] text-[#4d506e] hover:text-white bg-none hover:bg-[#ff004c] p-[15px] cursor-pointer"
+            className="text-[18px] text-[#4d506e] hover:text-white bg-none hover:bg-[#ff004c] p-[15px] cursor-pointer transition"
             onClick={() => deleta(item.id)}
           >
             Deletar
